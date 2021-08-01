@@ -26,6 +26,11 @@ function Book(title, author, pageNumber, readStatus=false) {
 	}
 }
 
+Book.prototype.toggleReadStatus = function() {
+    this.readStatus = !(this.readStatus);
+}
+
+
 //+++++++++++++++++ FORM FUNCTIONS ++++++++++++++++++++++
 function openForm() {
     popup.classList.add('show');
@@ -65,9 +70,20 @@ function addBookToLibrary(bk) {
     let entry = document.createElement('tr');
     entry.setAttribute('id', bk.index)
     for (let prop in bk) {                      // new Col for each Book prop
-        let fact = document.createElement('td');
-        fact.innerHTML = bk[prop];
-        entry.appendChild(fact);
+        if (bk.hasOwnProperty(prop)) {
+            if (!(prop === 'readStatus')) {
+                let fact = document.createElement('td');
+                fact.innerHTML = bk[prop];
+                entry.appendChild(fact);
+            } else {
+                let fact = document.createElement('button');
+                fact.innerHTML = bk[prop];
+                fact.setAttribute('id', 'readBtn-' + String(bk.index));
+                fact.setAttribute('class', 'readBtn');
+                entry.appendChild(fact);
+                addReadToggle(fact);
+            }  
+        }
     }
     // create DELETE btn
     let delBtn = document.createElement('button');
@@ -93,6 +109,16 @@ function addDelFunc(btn) {
     })
 }
 
+function addReadToggle(ele) {
+    ele.addEventListener('click', function() {
+        let id = ele.getAttribute('id').slice(-1);
+        let bk = myLibrary[id-1];
+        console.log(bk.readStatus);
+        bk.toggleReadStatus();
+        let readStatus = document.getElementById('readBtn-' + id);
+        readStatus.innerHTML = bk.readStatus;
+    })
+}
 
 //++++++++++++++ SELF TEST CODE ++++++++++++++++++++++
 function selfTest() {
