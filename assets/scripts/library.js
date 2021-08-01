@@ -8,7 +8,9 @@ const pageEntry = document.querySelector('#numPages');
 const readEntry = document.querySelector('#readStatus');
 const removeIconPath = '/assets/images/remove_icon.png'
 
+let bookIndex = 0;
 function Book(title, author, pageNumber, readStatus=false) {
+    this.index = ++bookIndex
 	this.title = title;
 	this.author = author;
 	this.pageNumber = pageNumber;
@@ -48,7 +50,7 @@ function submitForm() {
     closeForm();
 }
 
-let bookIndex = 0;
+
 /**
  * This function is intended to be called repeatedly for all 'Book' objects
  * created. Each time it is called, it creates a new row to display a 'Book'
@@ -58,28 +60,39 @@ let bookIndex = 0;
  */
 function addBookToLibrary(bk) {
     // Add in functionality to detect if this is a duplicate entry
-    bookIndex++;
+    // Add in functionality to reset the book index when books are deleted
     myLibrary.push(bk);
     let entry = document.createElement('tr');
-    // create INDEX for book
-    let index = document.createElement('td');
-    index.innerHTML = bookIndex;
-    entry.appendChild(index);
-    for (let prop in bk) {
+    entry.setAttribute('id', bk.index)
+    for (let prop in bk) {                      // new Col for each Book prop
         let fact = document.createElement('td');
         fact.innerHTML = bk[prop];
         entry.appendChild(fact);
     }
     // create DELETE btn
     let delBtn = document.createElement('button');
-    delBtn.setAttribute('id', 'delBtn-' + String(bookIndex));
+    delBtn.setAttribute('id', 'delBtn-' + String(bk.index));
     delBtn.setAttribute('class', 'delBtn');
+    addDelFunc(delBtn);
     entry.appendChild(delBtn);  // append DELETE btn to the end of each row
     let icon = document.createElement('img');
     icon.src = removeIconPath;
     delBtn.appendChild(icon);
     bookList.appendChild(entry);
 }
+
+function addDelFunc(btn) {
+    btn.addEventListener('click', function() {
+        let bId = btn.getAttribute('id');
+        let index = bId.slice(-1);
+        let dataRow = document.getElementById(String(index));
+        while (dataRow.hasChildNodes()) {
+            dataRow.firstChild.remove();
+        }
+        dataRow.remove();
+    })
+}
+
 
 //++++++++++++++ SELF TEST CODE ++++++++++++++++++++++
 function selfTest() {
