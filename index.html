@@ -2,8 +2,10 @@
 <head lang="en">
     <meta charset="utf-8">
     <link rel="stylesheet" href="assets/stylesheets/style.css">
+    <link rel="icon" type="image/png" href="/book.png">
     <title>Library</title>
 </head>
+<header>Book Tracker</header>
 <body>
     <script src="assets/scripts/library.js" defer></script>
     <table id='bookTable'>
@@ -14,8 +16,19 @@
             <th>Read?</th>
         </tr>
     </table>
-    <p class="WRAPPER-btn">
-        <button>Add a New Book</button>
-    </p>
-    
+    <div class="popup" onclick="openForm()">Click me!
+        <span id="myPopup" class="popuptext">
+            <form onsubmit="submitForm(); return false">
+                <label for="bookTitle">Book Title:</label>
+                <input id="bookTitle">
+                <label for="authorName">Author Name:</label>
+                <input id="authorName">
+                <label for="numPages">Number of Pages:</label>
+                <input id="numPages">
+                <label for="readStatus">Read?</label>
+                <input id="readStatus" type="checkbox">
+                <input type="submit" value="Submit"">
+            </form>
+        </span>
+    </div>
 </body>

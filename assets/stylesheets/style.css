@@ -20,9 +20,17 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
 }
+@font-face {
+    font-family: Staatliches;
+    src: url('/Staatliches-Regular.ttf') format('truetype');
+}
+
+* {
+    font-family: Staatliches, Helvetica, Arial, sans-serif;
+}
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -47,6 +55,7 @@ table {
 	border-spacing: 0;
     width: 100%;
     border: 1px solid black;
+    background-color: burlywood;
 }
 
 th, tr, td {
@@ -67,3 +76,57 @@ button {
     margin-left: auto;
     margin-right: auto;
 }
+
+header {
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+ /* Popup container */
+ .popup {
+    position: relative;
+    cursor: pointer;
+    background: sienna;
+  }
+  
+  /* The actual popup (appears on top) */
+  .popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: cadetblue;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+
+  }
+  
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  } 
