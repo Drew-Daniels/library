@@ -13,7 +13,7 @@ function Book(title, author, pageNumber, readStatus=false) {
     this.index = ++bookIndex
 	this.title = title;
 	this.author = author;
-	this.pageNumber = pageNumber;
+	this.pageNumber = +pageNumber;
 	this.readStatus = readStatus;
 	info = function() {
 		let readStr;
@@ -35,7 +35,7 @@ function submitForm() {
     let book, author, page, read, newAddition;
     function getFormData() {
         [book, author, page, read] = [bookEntry.value, authorEntry.value, 
-                                      pageEntry.value, readEntry.value]
+                                      pageEntry.value, readEntry.checked]
         newAddition = [book, author, page, read];
         return newAddition;
     }
