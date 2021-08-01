@@ -10,13 +10,15 @@
     <script src="assets/scripts/library.js" defer></script>
     <table id='bookTable'>
         <tr>
+            <th>Book Index</th>
             <th>Book Title</th>
             <th>Author</th>
             <th>Number of Pages</th>
             <th>Read?</th>
+            <th>Delete</th>
         </tr>
     </table>
-    <div class="popup" onclick="openForm()">Click me!
+    <div class="popup" onclick="openForm()">Add a New Book
         <span id="myPopup" class="popuptext">
             <form onsubmit="submitForm(); return false">
                 <label for="bookTitle">Book Title:</label>
