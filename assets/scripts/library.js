@@ -1,5 +1,6 @@
 //+++++++++++++++++ GRAB STATIC REFERENCES +++++++++++++++++++++
-let myLibrary
+let myLibrary;
+let index = 0;
 const bookList = document.querySelector('#bookTable');
 const popup = document.querySelector('#myPopup');
 const bookEntry = document.querySelector('#bookTitle');
@@ -8,9 +9,8 @@ const pageEntry = document.querySelector('#numPages');
 const readEntry = document.querySelector('#readStatus');
 const removeIconPath = '/assets/images/remove_icon.png'
 
-let bookIndex = 0;
 function Book(title, author, pageNumber, readStatus=false) {
-    this.index = ++bookIndex
+    this.index = 0; //default
 	this.title = title;
 	this.author = author;
 	this.pageNumber = +pageNumber;
@@ -58,11 +58,11 @@ function submitForm() {
 }
 
 function buildTable(lib) {
-    // could delete all rows, reset index, and redraw rows
-    let index = 0;
+    index = 0;
     lib.forEach((bk) => {
-        index++;
-        addRow(bk, index);
+        index++
+        bk['index'] = index;
+        addRow(bk, bk['index']);
     });
 }
 
@@ -71,15 +71,12 @@ function addBookToLibrary(bk) {
     // Add in functionality to reset the book index when books are deleted
     myLibrary.push(bk);
     saveToLocal();
-    let index = bk.index;
+    index++;
     addRow(bk, index)
 }
 
-function updateIndex() {
-    console.log(myLibrary[0].index);
-}
-
 function addRow(bk, index) {
+    bk['index'] = index;
     let entry = document.createElement('tr');
     entry.setAttribute('id', index)
     for (let prop in bk) {                      // new Col for each Book prop
