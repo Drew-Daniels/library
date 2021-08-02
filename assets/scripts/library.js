@@ -57,8 +57,13 @@ function submitForm() {
     closeForm();
 }
 
-function buildLibTable(lib) {
-    lib.forEach(addBookToLibrary);
+function buildTable(lib) {
+    // could delete all rows, reset index, and redraw rows
+    let index = 0;
+    lib.forEach((bk) => {
+        index++;
+        addRow(bk, index);
+    });
 }
 
 function addBookToLibrary(bk) {
@@ -198,7 +203,6 @@ function initLibrary() {
     if (useLocStorage) {
         initStorage();
         let userLibrary = locStor.getItem('userLibrary');
-        console.log(userLibrary);
         if (!(userLibrary === null)) {
             lib = JSON.parse(userLibrary);
             return lib;
@@ -218,4 +222,4 @@ function initStorage() {
 // RUN
 let useLocStorage = locStorageAvailable();
 myLibrary = initLibrary();
-myLibrary.forEach(addBookToLibrary);
+buildTable(myLibrary);
