@@ -1,5 +1,5 @@
 //+++++++++++++++++ GRAB STATIC REFERENCES +++++++++++++++++++++
-const myLibrary = [];
+let myLibrary
 const bookList = document.querySelector('#bookTable');
 const popup = document.querySelector('#myPopup');
 const bookEntry = document.querySelector('#bookTitle');
@@ -57,10 +57,15 @@ function submitForm() {
     closeForm();
 }
 
+function buildLibTable(lib) {
+    lib.forEach(addBookToLibrary);
+}
+
 function addBookToLibrary(bk) {
     // Add in functionality to detect if this is a duplicate entry
     // Add in functionality to reset the book index when books are deleted
     myLibrary.push(bk);
+    saveToLocal();
     let index = bk.index;
     addRow(bk, index)
 }
@@ -135,6 +140,7 @@ function addDelFunc(btn) {
         dataRow.remove();
         // Remove the book from the library
         myLibrary.splice(index-1, 1);
+        saveToLocal();
     })
 }
 
@@ -143,6 +149,7 @@ function addReadToggle(ele) {
         let id = ele.getAttribute('id').slice(-1);
         let bk = myLibrary[id-1];
         bk.toggleReadStatus();
+        saveToLocal();
         let readStatus = document.getElementById('readBtn-' + id);
         readStatus.innerHTML = bk.readStatus;
     })
@@ -164,7 +171,7 @@ function selfTest() {
                          false);
     const collection = [book1, book2, book3];
 
-    collection.forEach(addBookToLibrary);
+    return collection;
 }
 
 function locStorageAvailable() {
@@ -183,14 +190,23 @@ function locStorageAvailable() {
 }
 
 function saveToLocal() {
-
+    locStor.setItem('userLibrary', JSON.stringify(myLibrary))
 }
 
 function initLibrary() {
+    let lib;
     if (useLocStorage) {
         initStorage();
-        let lib = JSON.parse(locStor.getItem('userLibrary'));
-        console.log(lib);
+        let userLibrary = locStor.getItem('userLibrary');
+        console.log(userLibrary);
+        if (!(userLibrary === null)) {
+            lib = JSON.parse(userLibrary);
+            return lib;
+        }
+        else {
+            lib = selfTest();
+            return lib;
+        }
     }
 }
 
@@ -200,5 +216,6 @@ function initStorage() {
 }
 
 // RUN
-selfTest();
 let useLocStorage = locStorageAvailable();
+myLibrary = initLibrary();
+myLibrary.forEach(addBookToLibrary);
