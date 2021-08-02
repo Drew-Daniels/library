@@ -36,6 +36,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+p {
+    text-align: center;
+}
+
 body {
 	line-height: 1;
     background-color: navajowhite;
