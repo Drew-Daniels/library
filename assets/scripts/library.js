@@ -22,15 +22,13 @@ Book.prototype.toggleReadStatus = function() {
 }
 
 Book.prototype.info = function() {
-    info = function() {
-		let readStr;
-		if(readStatus) {
-			readStr = 'has been read';
-		} else {
-			readStr = 'has not been read';
-		}
-		return (title + ' by '+ author + ', ' + pageNumber + ', ' + readStr);
-	}
+    let readStr;
+    if(readStatus) {
+        readStr = 'has been read';
+    } else {
+        readStr = 'has not been read';
+    }
+    return (title + ' by '+ author + ', ' + pageNumber + ', ' + readStr);
 }
 
 //+++++++++++++++++ FORM FUNCTIONS ++++++++++++++++++++++
@@ -72,6 +70,10 @@ function addBookToLibrary(bk) {
     // Add in functionality to reset the book index when books are deleted
     myLibrary.push(bk);
     let index = bk.index;
+    addRow(bk, index)
+}
+
+function addRow(bk, index) {
     let entry = document.createElement('tr');
     entry.setAttribute('id', index)
     for (let prop in bk) {                      // new Col for each Book prop
@@ -84,8 +86,7 @@ function addBookToLibrary(bk) {
         }
     }
     // create DELETE btn
-    let delBtn = addDelBtn(bk.index, entry);
-    addIconToBtn(delBtn, removeIconPath)
+    addDelBtn(entry, index);
     bookList.appendChild(entry);
 }
 
@@ -116,12 +117,13 @@ function addReadBtn(ind, parent, text) {
     addReadToggle(btn);
 }
 
-function addDelBtn(ind, parent) {
+function addDelBtn(parent, ind) {
     let delBtn = document.createElement('button');
     delBtn.setAttribute('id', 'delBtn-' + String(ind));
     delBtn.setAttribute('class', 'delBtn');
     addDelFunc(delBtn);
     parent.appendChild(delBtn);  // append DELETE btn to the end of each row
+    addIconToBtn(delBtn, removeIconPath)
     return delBtn;
 }
 
