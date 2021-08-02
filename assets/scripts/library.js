@@ -95,7 +95,7 @@ function addRow(bk, index) {
 
 function addReadCol(text, parent, ind) {
     let fact = document.createElement('td');
-    addReadBtn(ind, parent, text);
+    addReadBtn(ind, fact, text);
     parent.appendChild(fact);
 }
 
@@ -148,9 +148,14 @@ function addDelFunc(btn) {
 
 function addReadToggle(ele) {
     ele.addEventListener('click', function() {
+        // Cannot directly assign prototype function because they could not
+        // then be read from localStorage later on
+        function toggleReadStatus(bk) {
+            bk.readStatus = !(bk.readStatus);
+        }
         let id = ele.getAttribute('id').slice(-1);
         let bk = myLibrary[id-1];
-        bk.toggleReadStatus();
+        toggleReadStatus(bk);
         saveToLocal();
         let readStatus = document.getElementById('readBtn-' + id);
         readStatus.innerHTML = bk.readStatus;
