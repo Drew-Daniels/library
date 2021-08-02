@@ -38,6 +38,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+    background-color: navajowhite;
 }
 ol, ul {
 	list-style: none;
@@ -79,6 +80,7 @@ button {
 
 header {
     text-align: center;
+    font-size:x-large;
 }
 
 div {
