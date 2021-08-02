@@ -167,5 +167,38 @@ function selfTest() {
     collection.forEach(addBookToLibrary);
 }
 
-selfTest();
+function locStorageAvailable() {
+    let storage;
+    try {
+        storage = window['localStorage'];
+        var x = 'test';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        console.log(e);
+        return false;
+    }
+}
 
+function saveToLocal() {
+
+}
+
+function initLibrary() {
+    if (useLocStorage) {
+        initStorage();
+        let lib = JSON.parse(locStor.getItem('userLibrary'));
+        console.log(lib);
+    }
+}
+
+let locStor;
+function initStorage() {
+    locStor = window['localStorage'];
+}
+
+// RUN
+selfTest();
+let useLocStorage = locStorageAvailable();
