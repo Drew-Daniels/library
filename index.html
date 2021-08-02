@@ -20,7 +20,7 @@
     </table>
     <div class="popup" onclick="openForm()">Add a New Book
         <span id="myPopup" class="popuptext">
-            <form onsubmit="submitForm(); return false">
+            <form onsubmit="submitForm(); return false" autocomplete="off">
                 <label for="bookTitle">Book Title:</label>
                 <input id="bookTitle">
                 <label for="authorName">Author Name:</label>
@@ -30,6 +30,7 @@
                 <label for="readStatus">Read?</label>
                 <input id="readStatus" type="checkbox">
                 <input type="submit" value="Submit"">
+                <button action="window.close();">Close</button>
             </form>
         </span>
     </div>

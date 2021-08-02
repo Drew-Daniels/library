@@ -50,8 +50,10 @@ function submitForm() {
     }
 
     let entry = getFormData();
-    let newBook = new Book(...entry);
-    addBookToLibrary(newBook);
+    if (!(entry[0] === "" || entry[1] ==="" || entry[2] === "")) {
+        let newBook = new Book(...entry);
+        addBookToLibrary(newBook);
+    }
     closeForm();
 }
 
@@ -76,12 +78,14 @@ function addBookToLibrary(bk) {
                 fact.innerHTML = bk[prop];
                 entry.appendChild(fact);
             } else {
-                let fact = document.createElement('button');
-                fact.innerHTML = bk[prop];
-                fact.setAttribute('id', 'readBtn-' + String(bk.index));
-                fact.setAttribute('class', 'readBtn');
+                let fact = document.createElement('td');
+                let btn = document.createElement('button');
+                btn.innerHTML = bk[prop];
+                btn.setAttribute('id', 'readBtn-' + String(bk.index));
+                btn.setAttribute('class', 'readBtn');
                 entry.appendChild(fact);
-                addReadToggle(fact);
+                fact.appendChild(btn);
+                addReadToggle(btn);
             }  
         }
     }
@@ -113,7 +117,6 @@ function addReadToggle(ele) {
     ele.addEventListener('click', function() {
         let id = ele.getAttribute('id').slice(-1);
         let bk = myLibrary[id-1];
-        console.log(bk.readStatus);
         bk.toggleReadStatus();
         let readStatus = document.getElementById('readBtn-' + id);
         readStatus.innerHTML = bk.readStatus;
