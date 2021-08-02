@@ -57,20 +57,16 @@ function submitForm() {
     closeForm();
 }
 
-
-/**
- * This function is intended to be called repeatedly for all 'Book' objects
- * created. Each time it is called, it creates a new row to display a 'Book'
- * object where each one is given it's own index and delete button.
- * Each book attribute is displayed as a separate column in the table.
- * @param {Book} bk 
- */
 function addBookToLibrary(bk) {
     // Add in functionality to detect if this is a duplicate entry
     // Add in functionality to reset the book index when books are deleted
     myLibrary.push(bk);
     let index = bk.index;
     addRow(bk, index)
+}
+
+function updateIndex() {
+    console.log(myLibrary[0].index);
 }
 
 function addRow(bk, index) {
@@ -129,6 +125,7 @@ function addDelBtn(parent, ind) {
 
 function addDelFunc(btn) {
     btn.addEventListener('click', function() {
+        // Remove the book from the display
         let bId = btn.getAttribute('id');
         let index = bId.slice(-1);
         let dataRow = document.getElementById(String(index));
@@ -136,6 +133,8 @@ function addDelFunc(btn) {
             dataRow.firstChild.remove();
         }
         dataRow.remove();
+        // Remove the book from the library
+        myLibrary.splice(index-1, 1);
     })
 }
 
