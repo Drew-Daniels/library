@@ -15,7 +15,14 @@ function Book(title, author, pageNumber, readStatus=false) {
 	this.author = author;
 	this.pageNumber = +pageNumber;
 	this.readStatus = readStatus;
-	info = function() {
+}
+
+Book.prototype.toggleReadStatus = function() {
+    this.readStatus = !(this.readStatus);
+}
+
+Book.prototype.info = function() {
+    info = function() {
 		let readStr;
 		if(readStatus) {
 			readStr = 'has been read';
@@ -25,11 +32,6 @@ function Book(title, author, pageNumber, readStatus=false) {
 		return (title + ' by '+ author + ', ' + pageNumber + ', ' + readStr);
 	}
 }
-
-Book.prototype.toggleReadStatus = function() {
-    this.readStatus = !(this.readStatus);
-}
-
 
 //+++++++++++++++++ FORM FUNCTIONS ++++++++++++++++++++++
 function openForm() {
@@ -69,36 +71,58 @@ function addBookToLibrary(bk) {
     // Add in functionality to detect if this is a duplicate entry
     // Add in functionality to reset the book index when books are deleted
     myLibrary.push(bk);
+    let index = bk.index;
     let entry = document.createElement('tr');
-    entry.setAttribute('id', bk.index)
+    entry.setAttribute('id', index)
     for (let prop in bk) {                      // new Col for each Book prop
         if (bk.hasOwnProperty(prop)) {
             if (!(prop === 'readStatus')) {
-                let fact = document.createElement('td');
-                fact.innerHTML = bk[prop];
-                entry.appendChild(fact);
+                addStandardCol(bk[prop], entry);
             } else {
-                let fact = document.createElement('td');
-                let btn = document.createElement('button');
-                btn.innerHTML = bk[prop];
-                btn.setAttribute('id', 'readBtn-' + String(bk.index));
-                btn.setAttribute('class', 'readBtn');
-                entry.appendChild(fact);
-                fact.appendChild(btn);
-                addReadToggle(btn);
-            }  
+                addReadCol(bk[prop], entry, index);
+            }
         }
     }
     // create DELETE btn
+    let delBtn = addDelBtn(bk.index, entry);
+    addIconToBtn(delBtn, removeIconPath)
+    bookList.appendChild(entry);
+}
+
+function addReadCol(text, parent, ind) {
+    let fact = document.createElement('td');
+    addReadBtn(ind, parent, text);
+    parent.appendChild(fact);
+}
+
+function addStandardCol(prop, parent) {
+    let fact = document.createElement('td');
+    fact.innerHTML = prop;
+    parent.appendChild(fact);
+}
+
+function addIconToBtn(btn, iconPath) {
+    let icon = document.createElement('img');
+    icon.src = iconPath;
+    btn.appendChild(icon);
+}
+
+function addReadBtn(ind, parent, text) {
+    let btn = document.createElement('button');
+    btn.innerHTML = text;
+    btn.setAttribute('id', 'readBtn-' + String(ind));
+    btn.setAttribute('class', 'readBtn');
+    parent.appendChild(btn);
+    addReadToggle(btn);
+}
+
+function addDelBtn(ind, parent) {
     let delBtn = document.createElement('button');
-    delBtn.setAttribute('id', 'delBtn-' + String(bk.index));
+    delBtn.setAttribute('id', 'delBtn-' + String(ind));
     delBtn.setAttribute('class', 'delBtn');
     addDelFunc(delBtn);
-    entry.appendChild(delBtn);  // append DELETE btn to the end of each row
-    let icon = document.createElement('img');
-    icon.src = removeIconPath;
-    delBtn.appendChild(icon);
-    bookList.appendChild(entry);
+    parent.appendChild(delBtn);  // append DELETE btn to the end of each row
+    return delBtn;
 }
 
 function addDelFunc(btn) {
