@@ -89,7 +89,8 @@ function addRow(bk, index) {
         }
     }
     // create DELETE btn
-    addDelBtn(entry, index);
+    //addDelBtn(entry, index);
+    addDelCol(entry, index);
     bookList.appendChild(entry);
 }
 
@@ -118,6 +119,12 @@ function addReadBtn(ind, parent, text) {
     btn.setAttribute('class', 'readBtn');
     parent.appendChild(btn);
     addReadToggle(btn);
+}
+
+function addDelCol(parent, ind) {
+    let fact = document.createElement('td');
+    addDelBtn(fact, ind);
+    parent.appendChild(fact);
 }
 
 function addDelBtn(parent, ind) {

@@ -22,13 +22,9 @@ time, mark, audio, video {
 	font-size: 100%;
 	vertical-align: baseline;
 }
-@font-face {
-    font-family: Staatliches;
-    src: url('/Staatliches-Regular.ttf') format('truetype');
-}
 
 * {
-    font-family: Staatliches, Helvetica, Arial, sans-serif;
+    font-family: 'Rajdhani', sans-serif;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -42,7 +38,7 @@ p {
 
 body {
 	line-height: 1;
-    background-color: navajowhite;
+    background-color: azure;
 }
 ol, ul {
 	list-style: none;
@@ -60,11 +56,6 @@ table {
 	border-spacing: 0;
     width: 100%;
     border: 1px solid black;
-    background-color: burlywood;
-}
-
-th, tr, td {
-    border: 1px solid black;    
 }
 
 td {
@@ -77,11 +68,6 @@ td {
     justify-items: center;
 }
 
-button {
-    margin-left: auto;
-    margin-right: auto;
-}
-
 header {
     text-align: center;
     font-size:x-large;
@@ -92,9 +78,7 @@ div {
 }
 
 .delBtn {
-    width: 50px;
-    height: 50px;
-    padding: 0px;
+
 }
 
 img {
@@ -106,7 +90,7 @@ img {
  .popup {
     position: relative;
     cursor: pointer;
-    background: sienna;
+    background: ;
   }
   
   /* The actual popup (appears on top) */
