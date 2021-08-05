@@ -34,11 +34,11 @@ footer, header, hgroup, menu, nav, section {
 }
 p {
     text-align: center;
+    margin-top: 15px;
 }
 
 body {
 	line-height: 1;
-    background-color: azure;
 }
 ol, ul {
 	list-style: none;
@@ -54,8 +54,13 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-    width: 100%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
     border: 1px solid black;
+    background-color: azure;
 }
 
 td {
@@ -77,51 +82,45 @@ div {
     text-align: center;
 }
 
+button {
+    margin: 5px;
+    text-align: center;
+}
+
 .delBtn {
 
 }
 
 img {
     background: url('/assets/images/remove_icon.png');
-    filter: sepa(100%);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
 }
 
- /* Popup container */
  .popup {
     position: relative;
     cursor: pointer;
-    background: ;
   }
   
-  /* The actual popup (appears on top) */
   .popup .popuptext {
     visibility: hidden;
     width: 160px;
-    background-color: cadetblue;
-    color: #fff;
+    background-color: azure;
+    color: #000;
     text-align: center;
     border-radius: 6px;
     padding: 8px 0;
-    position: absolute;
-
   }
   
-  /* Popup arrow */
-  .popup .popuptext::after {
-    content: "";
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-  }
   
-  /* Toggle this class when clicking on the popup container (hide and show the popup) */
-  .popup .show {
+.popup .show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s
   }
   
-  /* Add animation (fade in the popup) */
   @-webkit-keyframes fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
