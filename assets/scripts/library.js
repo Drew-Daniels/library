@@ -133,7 +133,7 @@ function addDelBtn(parent, ind) {
     delBtn.setAttribute('class', 'delBtn');
     addDelFunc(delBtn);
     parent.appendChild(delBtn);  // append DELETE btn to the end of each row
-    addIconToBtn(delBtn, removeIconPath)
+    //addIconToBtn(delBtn, removeIconPath)
     return delBtn;
 }
 

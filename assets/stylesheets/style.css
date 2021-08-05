@@ -78,6 +78,10 @@ header {
     font-size:x-large;
 }
 
+footer {
+    text-align: center;
+}
+
 div {
     text-align: center;
 }
@@ -91,11 +95,16 @@ button {
 
 }
 
-img {
+.delBtn {
     background: url('/assets/images/remove_icon.png');
     background-repeat: no-repeat;
     background-size: contain;
     width: 20px;
+    height: 20px;
+}
+
+#githubLogo {
+    width: 30px;
     height: 20px;
 }
 
