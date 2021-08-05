@@ -76,6 +76,7 @@ td {
 #bookPicture {
     width: 50px;
     height: auto;
+    margin-right: 15px;
 }
 
 header {
@@ -112,9 +113,13 @@ button {
     height: 20px;
 }
 
-#githubLogo {
+#githubIcon {
     width: 20px;
-    height: 20px;
+    height: auto;
+}
+
+#githubProfileLink {
+    margin: 15px;
 }
 
  .popup {
