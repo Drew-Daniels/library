@@ -123,6 +123,14 @@ function addReadBtn(ind, parent, text) {
     btn.setAttribute('class', 'readBtn');
     parent.appendChild(btn);
     addReadToggle(btn);
+    // preset button colors
+    let greenRGB = 'rgb(0, 255, 0)';
+    let redRGB = 'rgb(255, 0, 0)';
+    if (btn.innerText === 'false') {
+        btn.style.backgroundColor = redRGB;
+    } else {
+        btn.style.backgroundColor = greenRGB;
+    }
 }
 
 function addDelCol(parent, ind) {
@@ -157,6 +165,19 @@ function addDelFunc(btn) {
     })
 }
 
+function alternateBtnColor(btn) {
+    let currBgrdCol, newBgrdCol, redRGB;
+    currBgrdCol = document.getElementById(btn.getAttribute('id'))
+                  .style.backgroundColor;
+    redRGB = 'rgb(255, 0, 0)';
+    greenRGB = 'rgb(0, 255, 0)';
+    if (currBgrdCol === greenRGB) {
+        newBgrdCol = redRGB
+    } else newBgrdCol = greenRGB;
+    document.getElementById(btn.getAttribute('id')).style.backgroundColor =
+        newBgrdCol;
+}
+
 function addReadToggle(ele) {
     ele.addEventListener('click', function() {
         // Cannot directly assign prototype function because they could not
@@ -170,6 +191,7 @@ function addReadToggle(ele) {
         saveToLocal();
         let readStatus = document.getElementById('readBtn-' + id);
         readStatus.innerText = bk.readStatus;
+        alternateBtnColor(ele);
     })
 }
 
