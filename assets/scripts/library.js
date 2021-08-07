@@ -50,8 +50,12 @@ function submitForm() {
     }
 
     let entry = getFormData();
-    if (!(entry[0] === "" || entry[1] ==="" || entry[2] === "")) {
-        let newBook = new Book(...entry);
+    let bookTitle = entry[0] ;
+    let authorName = entry[1];
+    let numPages = entry[2];
+    let readStat = entry[3];
+    if (entry[0] !== "" && entry[1] !== "" && entry[2] !== "") {
+        let newBook = new Book(bookTitle, authorName, numPages, readStat);
         addBookToLibrary(newBook);
     }
     closeForm();
@@ -165,7 +169,7 @@ function addReadToggle(ele) {
         toggleReadStatus(bk);
         saveToLocal();
         let readStatus = document.getElementById('readBtn-' + id);
-        readStatus.innerHTML = bk.readStatus;
+        readStatus.innerText = bk.readStatus;
     })
 }
 
