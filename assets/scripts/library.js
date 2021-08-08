@@ -9,26 +9,26 @@ const pageEntry = document.querySelector('#numPages');
 const readEntry = document.querySelector('#readStatus');
 const removeIconPath = '/assets/images/remove_icon.png'
 
-function Book(title, author, pageNumber, readStatus=false) {
-    this.index = 0; //default
-	this.title = title;
-	this.author = author;
-	this.pageNumber = +pageNumber;
-	this.readStatus = readStatus;
-}
-
-Book.prototype.toggleReadStatus = function() {
-    this.readStatus = !(this.readStatus);
-}
-
-Book.prototype.info = function() {
-    let readStr;
-    if(readStatus) {
-        readStr = 'has been read';
-    } else {
-        readStr = 'has not been read';
+class Book {
+    constructor(title, author, pageNumber, readStatus=false) {
+        this.index = 0;
+        this.title = title;
+        this.author = author;
+        this.pageNumber = pageNumber;
+        this.readStatus = readStatus;
     }
-    return (title + ' by '+ author + ', ' + pageNumber + ', ' + readStr);
+    toggleReadStatus() {
+        this.readStatus = !(this.readStatus);
+    }
+    info() {
+        let readStr;
+        if(this.readStatus) {
+            readStr = 'has been read';
+        } else {
+            readStr = 'has not been read';
+        }
+        return (this.title + ' by '+ this.author + ', ' + this.pageNumber + ', ' + this.readStr);
+    }
 }
 
 //+++++++++++++++++ FORM FUNCTIONS ++++++++++++++++++++++
