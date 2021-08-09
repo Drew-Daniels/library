@@ -102,10 +102,6 @@ button {
 }
 
 .delBtn {
-
-}
-
-.delBtn {
     background: url('assets/images/remove_icon.png');
     background-repeat: no-repeat;
     background-size: contain;
