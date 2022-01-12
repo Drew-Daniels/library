@@ -26,14 +26,14 @@
         <span id="myPopup" class="popuptext">
             <form onsubmit="submitForm(); return false" autocomplete="off">
                 <label for="bookTitle">Book Title:</label>
-                <input id="bookTitle">
+                <input id="bookTitle" type="text" required>
                 <label for="authorName">Author Name:</label>
-                <input id="authorName">
+                <input id="authorName" type="text" required>
                 <label for="numPages">Number of Pages:</label>
-                <input id="numPages">
+                <input id="numPages" type="number" required min="1" max="11000">
                 <label for="readStatus">Read?</label>
                 <input id="readStatus" type="checkbox">
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit" required>
                 <button action="window.close();">Close</button>
             </form>
         </span>
